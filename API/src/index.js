@@ -1,5 +1,6 @@
 const express = require("express");
 const { parseSing, parseSingUpdate, parseId } = require("./services/parseSing");
+const { newId } = require("./services/newId");
 const app = express();
 app.use(express.json());
 var SING = [];
@@ -13,7 +14,8 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   try {
     const newSing = parseSing(req.body);
-    const id = SING.length + 1;
+    const id = newId(SING);
+
     SING.push({ id, ...newSing });
     res.status(200).send("Sing created");
   } catch (error) {
