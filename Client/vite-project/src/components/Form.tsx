@@ -41,7 +41,8 @@ export const Form:FC<Props> = () => {
         photo:"",
         genere:"",
         
-      })}
+      })
+    setError(false)}
   }
   const useStyles=makeStyles()((_theme)=>{
     return{
@@ -50,8 +51,8 @@ export const Form:FC<Props> = () => {
         },
         
         area:{
-          width:510,
-          marginLeft:20
+          width:500,
+          marginLeft:10
         }
           }
   })
@@ -77,8 +78,7 @@ export const Form:FC<Props> = () => {
             value={input.date}
               onChange={(e)=>handleChange(e)}
               name="date"
-              label="Fecha Nacimiento"
-              type="text"
+              type="date"
               
             />
           </Grid>

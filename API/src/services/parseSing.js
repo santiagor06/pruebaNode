@@ -52,7 +52,7 @@ const parseSing = (param) => {
 };
 const parseSingUpdate = (param) => {
   return {
-    id: parseId(param.id),
+    id: param.id,
     name: parseName(param.name),
     date: parseDate(param.date),
     biography: parseBiography(param.biography),

@@ -1,8 +1,10 @@
 const express = require("express");
 const { parseSing, parseSingUpdate, parseId } = require("./services/parseSing");
 const { newId } = require("./services/newId");
+const cors = require("cors");
 const app = express();
 app.use(express.json());
+app.use(cors());
 var SING = [];
 
 const PORT = 3001;
@@ -25,7 +27,8 @@ app.post("/", (req, res) => {
 
 app.put("/", (req, res) => {
   try {
-    const id = parseId(req.body.id);
+    const id = req.body.id;
+    console.log(id);
     SING = SING.filter((s) => id !== s.id);
     const singUpdate = parseSingUpdate(req.body);
     SING.push(singUpdate);
@@ -35,11 +38,11 @@ app.put("/", (req, res) => {
   }
 });
 
-app.delete("/", (req, res) => {
+app.delete("/:id", (req, res) => {
   try {
-    const id = parseId(req.body.id);
+    const id = Number(req.params.id);
     SING = SING.filter((s) => s.id !== id);
-    res.status(200).send(`Sing ${id} deleted`);
+    res.status(200).send("deleted");
   } catch (error) {
     send.status(400).send(error.message);
   }
